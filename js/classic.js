@@ -11,8 +11,9 @@ let visibleBooks = [];
 function renderBooks() {
     container.innerHTML = "";
 
-    const shuffledData = [...filteredData].sort(() => Math.random() - 0.5);
-    visibleBooks = shuffledData.slice(0, visibleCount);
+    // const shuffledData = [...filteredData].sort(() => Math.random() - 0.5);
+    // visibleBooks = shuffledData.slice(0, visibleCount);
+    visibleBooks = filteredData.slice(0, visibleCount);
 
     if (visibleBooks.length === 0) {
         container.innerHTML = `<div style="text-align:center; padding:20px;">
@@ -86,8 +87,14 @@ let currentBook = {};
 function attachOpenEvents() {
     document.querySelectorAll(".btn-open").forEach(btn => {
         btn.onclick = function () {
-            currentBook = visibleBooks[this.dataset.index];
+            const book = visibleBooks[this.dataset.index];
 
+            if (!book) {
+                console.warn("No book found for index", this.dataset.index);
+                return;
+            }
+
+            currentBook = book;
             const theoryBtn = document.getElementById("theoryBtn");
 
             theoryBtn.textContent = "Open Book";
