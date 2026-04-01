@@ -11,10 +11,7 @@ let filteredData = [...modulesData];
 function renderModules() {
     container.innerHTML = "";
 
-    // Shuffle the filtered data for random display
-    const shuffledData = [...filteredData].sort(() => Math.random() - 0.5);
-    const visibleItems = shuffledData.slice(0, visibleCount);
-
+    const visibleItems = filteredData.slice(0, visibleCount);
     if (visibleItems.length === 0) {
         container.innerHTML = `<div style="text-align:center; padding:20px;">
             No modules found
